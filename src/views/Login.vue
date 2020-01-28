@@ -61,49 +61,40 @@
 </template>
 
 <script>
-  import {
-    email,
-    required,
-    minLength
-  } from 'vuelidate/lib/validators'
-  import messages from '@/utils/messages'
+import {email, required, minLength} from 'vuelidate/lib/validators'
+import messages from '@/utils/messages'
 
-  export default {
-    name: 'login',
-    data: () => ({
-      email: '',
-      password: ''
-    }),
-    validation: {
-      email: {
-        email,
-        required
-      },
-      password: {
-        required,
-        minLength: minLength(6)
+export default {
+  name: 'login',
+  data: () => ({
+    email: '',
+    password: ''
+  }),
+  validations: {
+    email: {email, required},
+    password: {required, minLength: minLength(6)}
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message])
+    }
+  },
+  methods: {
+    async submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
       }
-    },
-    mounted() {
-      if (messages[this.$route.query.message]) {
-        this.$message(messages[this.$route.query.message])
+      const formData = {
+        email: this.email,
+        password: this.password
       }
-    },
-    methods: {
-      async submitHandler() {
-        if (this.$v.$invalid) {
-          this.$v.$tuch()
-          return
-        }
-        const formData = {
-          email: this.email,
-          password: this.password
-        }
-        try {
-          await this.$store.dispatch('login', formData)
-          this.$router.push('/')
-        } catch (e) {}
-      }
+
+      try {
+        await this.$store.dispatch('login', formData)
+        this.$router.push('/')
+      } catch (e) {}
     }
   }
+}
 </script>
