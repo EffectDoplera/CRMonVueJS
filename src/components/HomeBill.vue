@@ -10,7 +10,7 @@
           class="currency-line"
         >
           <span>
-            {{getCurrency(cur) | currency(cur)}}
+            {{ getCurrency(cur) | currency(cur) }}
           </span>
         </p>
       </div>
@@ -22,16 +22,16 @@
 export default {
   props: ['rates'],
   data: () => ({
-    currencies: ['RUB', 'EUR', 'USD']
+    currencies: ['RUB', 'USD', 'EUR']
   }),
   computed: {
     base() {
-      return this.$store.getters.info.bill / (this.retes['RUB'] / this.retes['EUR'])
+      return this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['EUR'])
     }
   },
   methods: {
     getCurrency(currency) {
-     return Math.floor(this.base * this.rates[currency])
+      return Math.floor(this.base * this.rates[currency])
     }
   }
 }

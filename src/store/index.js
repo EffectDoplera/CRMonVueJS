@@ -13,7 +13,7 @@ export default new Vuex.Store({
     setError(state, error) {
       state.error = error
     }, 
-    claerError(state) {
+    clearError(state) {
       state.error = null
     }
   },
