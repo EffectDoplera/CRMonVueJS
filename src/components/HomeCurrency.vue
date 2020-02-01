@@ -7,11 +7,11 @@
         </div>
         <table>
           <thead>
-            <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
-            </tr>
+          <tr>
+            <th>Валюта</th>
+            <th>Курс</th>
+            <th>Дата</th>
+          </tr>
           </thead>
 
           <tbody>
@@ -35,3 +35,4 @@ export default {
   })
 }
 </script>
+
