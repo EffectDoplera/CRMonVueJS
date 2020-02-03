@@ -16,25 +16,38 @@
     </p>
 
     <section v-else>
-      <HistoryTable :records="records" />
+      <HistoryTable :records="items" />
+
+      <Paginate 
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="pageChangeHandler"
+        :prev-text="'Назад'"
+        :next-text="'Вперед'"
+        :container-class="'pagination'"
+        :page-class="'waves-effect'"
+      />
+
+
     </section>
   </div>
 </template>
 
 <script>
+
+import paginationMixin from '@/mixins/pagination.mixin'
 import HistoryTable from '@/components/HistoryTable'
 import {Pie} from 'vue-chartjs'
 
 export default {
   name: 'history',
+  mixins: [paginationMixin],
   extends: Pie,
   data: () => ({
     loading: true,
-    records: [],
-    categories: []
+    records: []
   }),
   async mounted() {
-    // this.records = await this.$store.dispatch('fetchRecords')
     this.records = await this.$store.dispatch('fetchRecords')
     const categories = await this.$store.dispatch('fetchCategories')
     
@@ -44,14 +57,14 @@ export default {
   },
   methods: {
     setup(categories) {
-      this.records = records.map(record => {
+      this.setupPagination(this.records.map(record => {
       return {
         ...record,
-        categoryName: this.categories.find(c => c.id === record.categoryId).title,
+        categoryName: categories.find(c => c.id === record.categoryId).title,
         typeClass: record.type === 'income' ? 'green' : 'red',
         typeText: record.type === 'income' ? 'Доход' : 'Расход'
       }
-    })
+    }))
 
       this.renderChart({
         labels: categories.map(c => c.title),
@@ -59,9 +72,10 @@ export default {
             label: 'Расходы по категориям',
             data: categories.map(c => {
               return this.records.reduce((total, r) => {
-                if (record.categoryId === c.id && r.type === 'outcome') {
+                if (r.categoryId === c.id && r.type === 'outcome') {
                   total += +r.amount
-                } return total
+                } 
+                return total
               }, 0)
             }),
             backgroundColor: [
