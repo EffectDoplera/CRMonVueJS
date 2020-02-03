@@ -10,13 +10,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
+      path: '/login/',
       name: 'login',
       meta: {layout: 'empty'},
       component: () => import('../views/Login.vue')
     },
     {
-      path: '/register',
+      path: '/register/',
       name: 'register',
       meta: {layout: 'empty'},
       component: () => import('../views/Register.vue')
@@ -28,37 +28,37 @@ const router = new VueRouter({
       component: () => import('../views/Home.vue')
     },
     {
-      path: '/categories',
+      path: '/categories/',
       name: 'categories',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/Categories.vue')
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/Detail.vue')
     },
     {
-      path: '/history',
+      path: '/history/',
       name: 'history',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/History.vue')
     },
     {
-      path: '/planning',
+      path: '/planning/',
       name: 'planning',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/Planning.vue')
     },
     {
-      path: '/profile',
+      path: '/profile/',
       name: 'profile',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/Profile.vue')
     },
     {
-      path: '/record',
+      path: '/record/',
       name: 'record',
       meta: {layout: 'main', auth: true},
       component: () => import('../views/Record.vue')
