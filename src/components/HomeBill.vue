@@ -24,14 +24,9 @@ export default {
   data: () => ({
     currencies: ['RUB', 'USD', 'EUR']
   }),
-  computed: {
-    base() {
-      return this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['EUR'])
-    }
-  },
   methods: {
     getCurrency(currency) {
-      return Math.floor(this.base * this.rates[currency])
+      return Math.floor( this.$store.getters.info.bill * this.rates[currency])
     }
   }
 }
