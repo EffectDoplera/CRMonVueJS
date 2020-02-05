@@ -3,21 +3,21 @@
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
-          <span class="card-title">Курс валют</span>
+          <span class="card-title">{{'CurrencyAmountTitle'|localize}}</span>
         </div>
         <table>
           <thead>
           <tr>
-            <th>Валюта</th>
-            <th>Курс</th>
-            <th>Дата</th>
+            <th>{{'Currency'|localize}}</th>
+            <th>{{'CurrencyType'|localize}}</th>
+            <th>{{'Date'|localize}}</th>
           </tr>
           </thead>
 
           <tbody>
             <tr v-for="cur in currencies" :key="cur">
               <td>{{cur}}</td>
-              <td>{{(rates['RUB'] / rates[cur]).toFixed(5)}}</td>
+              <td>{{(rates['RUB'] / rates[cur]).toFixed(4)}}</td>
               <td>{{date | date('date')}}</td>
             </tr>
           </tbody>

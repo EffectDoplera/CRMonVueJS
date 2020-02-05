@@ -39,7 +39,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { required } from 'vuelidate/lib/validators'
-import localizeFilter from '@/filters/localize.filter'
+import localeFilter from '@/filters/localize.filter'
 export default {
   metaInfo() {
     return {
